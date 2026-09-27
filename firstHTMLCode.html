@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trash Disposal — FTC Team #36440</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal:#0D3B4F; --teal-mid:#0F4F6A; --amber:#F5A623; --amber-lt:#FFD07A;
+    --off-white:#F8F6F0; --charcoal:#1A1A2E; --grey:#6B7280; --grey-lt:#E5E7EB;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family:'Inter',sans-serif; background:var(--off-white); color:var(--charcoal); overflow-x:hidden; }
+
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(13,59,79,0.97); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 2.5rem; height:60px; border-bottom:2px solid var(--amber);
+  }
+  .nav-brand { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.2rem; color:var(--off-white); letter-spacing:0.05em; text-transform:uppercase; }
+  .nav-brand span { color:var(--amber); }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1rem; color:rgba(248,246,240,0.75); text-decoration:none; letter-spacing:0.08em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--amber); }
+
+  .hero {
+    min-height:100vh; background:var(--teal);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; padding:80px 2rem 4rem; text-align:center;
+  }
+  .hex-bg { position:absolute; inset:0; opacity:0.07; pointer-events:none; }
+  .hero::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg,transparent,var(--amber),transparent);
+    animation:sweep 3s ease-in-out infinite;
+  }
+  @keyframes sweep { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+  .team-badge {
+    display:inline-flex; align-items:center; gap:0.75rem;
+    background:rgba(245,166,35,0.15); border:1px solid rgba(245,166,35,0.4);
+    border-radius:2px; padding:0.4rem 1.2rem; margin-bottom:2rem;
+    font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.95rem;
+    color:var(--amber-lt); letter-spacing:0.12em; text-transform:uppercase;
+  }
+  .badge-dot { width:6px; height:6px; border-radius:50%; background:var(--amber); animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:0.5} }
+
+  .team-number {
+    font-family:'Barlow Condensed',sans-serif; font-weight:900;
+    font-size:clamp(6rem,20vw,14rem); line-height:0.85;
+    color:transparent; -webkit-text-stroke:2px rgba(245,166,35,0.5);
+    letter-spacing:-0.02em; margin-bottom:0.5rem; position:relative;
+  }
+  .team-number::before {
+    content:attr(data-text); position:absolute; inset:0;
+    color:var(--amber); -webkit-text-stroke:0;
+    clip-path:inset(0 100% 0 0);
+    animation:fill-in 1.2s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  @keyframes fill-in { to{clip-path:inset(0 0% 0 0)} }
+
+  .team-name {
+    font-family:'Barlow Condensed',sans-serif; font-weight:800;
+    font-size:clamp(2.5rem,8vw,5.5rem); color:var(--off-white);
+    letter-spacing:0.04em; text-transform:uppercase; line-height:1; margin-bottom:1.5rem;
+  }
+  .hero-sub { font-size:1.05rem; color:rgba(248,246,240,0.6); max-width:520px; line-height:1.7; margin-bottom:2.5rem; }
+  .hero-tags { display:flex; flex-wrap:wrap; gap:0.75rem; justify-content:center; }
+  .tag {
+    background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15);
+    border-radius:2px; padding:0.35rem 0.9rem;
+    font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.9rem;
+    color:rgba(248,246,240,0.8); letter-spacing:0.08em; text-transform:uppercase;
+  }
+
+  section { padding:5rem 2rem; }
+  .container { max-width:1000px; margin:0 auto; }
+  .section-eyebrow { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.8rem; color:var(--amber); letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem; }
+  .section-title { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:clamp(2rem,5vw,3rem); color:var(--teal); line-height:1.1; margin-bottom:1.25rem; }
+  .section-body { font-size:1.05rem; color:var(--grey); line-height:1.75; max-width:680px; }
+
+  .about { background:var(--off-white); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:3rem; }
+  .about-card { background:white; border-radius:4px; border-top:3px solid var(--amber); padding:2rem; box-shadow:0 2px 12px rgba(13,59,79,0.06); }
+  .about-card-icon { font-size:2rem; margin-bottom:1rem; }
+  .about-card h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.35rem; color:var(--teal); margin-bottom:0.6rem; text-transform:uppercase; letter-spacing:0.04em; }
+  .about-card p { font-size:0.95rem; color:var(--grey); line-height:1.65; }
+
+  .season { background:var(--teal); }
+  .season .section-title { color:var(--off-white); }
+  .season .section-body { color:rgba(248,246,240,0.65); }
+  .biobuzz-badge {
+    display:inline-flex; align-items:center; gap:1rem;
+    background:rgba(245,166,35,0.12); border:1px solid rgba(245,166,35,0.35);
+    border-radius:4px; padding:1.25rem 2rem; margin-top:2.5rem;
+  }
+  .biobuzz-hex { font-size:3rem; }
+  .biobuzz-text strong { display:block; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2rem; color:var(--amber); letter-spacing:0.05em; text-transform:uppercase; }
+  .biobuzz-text span { font-size:0.9rem; color:rgba(248,246,240,0.6); letter-spacing:0.05em; }
+  .season-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
+  .stat { text-align:center; padding:1.5rem; border:1px solid rgba(245,166,35,0.2); border-radius:4px; background:rgba(255,255,255,0.04); }
+  .stat-num { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:2.5rem; color:var(--amber); line-height:1; margin-bottom:0.25rem; }
+  .stat-label { font-size:0.8rem; color:rgba(248,246,240,0.5); letter-spacing:0.1em; text-transform:uppercase; }
+
+  .team-section { background:white; }
+  .coach-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:2.5rem; }
+  .coach-card { display:flex; align-items:center; gap:1.25rem; padding:1.5rem; background:var(--off-white); border-radius:4px; border-left:3px solid var(--amber); }
+  .coach-avatar { width:52px; height:52px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:1.3rem; color:var(--amber); flex-shrink:0; }
+  .coach-info strong { display:block; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; color:var(--teal); text-transform:uppercase; letter-spacing:0.04em; }
+  .coach-info span { font-size:0.85rem; color:var(--grey); }
+  .members-block { margin-top:2.5rem; padding:2rem; background:var(--off-white); border-radius:4px; border-top:3px solid var(--teal); }
+  .members-block h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.2rem; color:var(--teal); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:1rem; }
+  .member-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .member-tag { background:white; border:1px solid var(--grey-lt); border-radius:2px; padding:0.3rem 0.8rem; font-size:0.875rem; color:var(--charcoal); }
+
+  .contact-section { background:var(--charcoal); text-align:center; padding:4rem 2rem; }
+  .contact-section .section-title { color:var(--off-white); margin-bottom:0.75rem; }
+  .contact-section .section-body { color:rgba(248,246,240,0.55); margin:0 auto 2.5rem; max-width:460px; }
+  .contact-details { display:inline-flex; flex-direction:column; gap:1rem; text-align:left; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:4px; padding:2rem 3rem; }
+  .contact-row { display:flex; align-items:center; gap:1rem; }
+  .contact-label { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.8rem; color:var(--amber); letter-spacing:0.15em; text-transform:uppercase; width:90px; flex-shrink:0; }
+  .contact-value { font-size:0.95rem; color:rgba(248,246,240,0.8); }
+
+  footer { background:var(--teal); border-top:2px solid rgba(245,166,35,0.3); text-align:center; padding:1.5rem; font-size:0.8rem; color:rgba(248,246,240,0.4); letter-spacing:0.05em; }
+
+  @media(max-width:680px) {
+    .nav-links{display:none}
+    .about-grid,.coach-grid,.season-stats{grid-template-columns:1fr}
+    .contact-details{padding:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Trash Disposal <span>#36440</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#season">Season</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <svg class="hex-bg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <defs>
+      <pattern id="hex" x="0" y="0" width="80" height="92" patternUnits="userSpaceOnUse">
+        <polygon points="40,2 76,22 76,62 40,82 4,62 4,22" fill="none" stroke="#F5A623" stroke-width="1.5"/>
+        <polygon points="0,47 16,57 16,77 0,87" fill="none" stroke="#F5A623" stroke-width="1.5"/>
+        <polygon points="80,47 64,57 64,77 80,87" fill="none" stroke="#F5A623" stroke-width="1.5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#hex)"/>
+  </svg>
+  <div class="team-badge"><span class="badge-dot"></span>FIRST Tech Challenge · Ottawa, Ontario · 2026–2027</div>
+  <div class="team-number" data-text="#36440">#36440</div>
+  <h1 class="team-name">Trash Disposal</h1>
+  <p class="hero-sub">A competitive robotics team from Ottawa, Ontario competing in the FIRST Tech Challenge BIOBUZZ™ season. We design, build, and program robots — and we solve problems.</p>
+  <div class="hero-tags">
+    <span class="tag">Grades 7–12</span>
+    <span class="tag">Ottawa, ON</span>
+    <span class="tag">10 Members</span>
+    <span class="tag">BIOBUZZ™ 2026–27</span>
+    <span class="tag">Team #36440</span>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <p class="section-eyebrow">Who We Are</p>
+    <h2 class="section-title">Engineering with purpose.</h2>
+    <p class="section-body">Trash Disposal #36440 is an Ottawa-based FTC robotics team of 10 students in Grades 7–12. We compete in the FIRST Tech Challenge — a global program where students design, build, program, and operate robots in head-to-head competition. Beyond the robot, we develop engineering notebooks, pursue community outreach, and compete for design and innovation awards.</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-card-icon">🔩</div>
+        <h3>Build</h3>
+        <p>We use the REV DUO mechanical system to design and construct competition robots capable of completing complex field challenges under time pressure.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">💻</div>
+        <h3>Program</h3>
+        <p>Students write Java-based autonomous and driver-controlled code using the REV Control Hub and OnBot Java environment — real engineering, not toy blocks.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">📓</div>
+        <h3>Document</h3>
+        <p>Every session is recorded in our Engineering Notebook — a judged deliverable that tracks design decisions, iterations, and lessons learned all season.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">🤝</div>
+        <h3>Outreach</h3>
+        <p>We run community outreach events to inspire younger students in STEM and actively promote the values of gracious professionalism across Ottawa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="season" id="season">
+  <div class="container">
+    <p class="section-eyebrow">2026–2027 Season</p>
+    <h2 class="section-title">BIOBUZZ™</h2>
+    <p class="section-body">The 2026–27 FIRST Tech Challenge game is BIOBUZZ™, presented by RTX. Teams compete on a 12×12 ft field, completing game-specific tasks during autonomous and driver-controlled periods. Our season runs from September 2026 through the Ontario Provincial Championship in February 2027.</p>
+    <div class="biobuzz-badge">
+      <div class="biobuzz-hex">🐝</div>
+      <div class="biobuzz-text">
+        <strong>BIOBUZZ™</strong>
+        <span>FIRST Tech Challenge · Season Kickoff September 12, 2026</span>
+      </div>
+    </div>
+    <div class="season-stats">
+      <div class="stat"><div class="stat-num">22</div><div class="stat-label">Weekly Sessions</div></div>
+      <div class="stat"><div class="stat-num">2 hrs</div><div class="stat-label">Per Session</div></div>
+      <div class="stat"><div class="stat-num">Dec</div><div class="stat-label">Ottawa Qualifier</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section" id="team">
+  <div class="container">
+    <p class="section-eyebrow">Our Team</p>
+    <h2 class="section-title">The people behind the robot.</h2>
+    <p class="section-body">Trash Disposal is a team of 10 students in Grades 7–12, guided by two certified adult coaches with backgrounds in STEM education and competitive robotics. We meet Sundays at Beaverbrook Community Centre in Ottawa.</p>
+    <div class="coach-grid">
+      <div class="coach-card">
+        <div class="coach-avatar">LK</div>
+        <div class="coach-info">
+          <strong>Lee Kachroo</strong>
+          <span>Head Coach</span>
+        </div>
+      </div>
+      <div class="coach-card">
+        <div class="coach-avatar">MP</div>
+        <div class="coach-info">
+          <strong>Hina Tahasildar</strong>
+          <span>Assistant Coach</span>
+        </div>
+      </div>
+    </div>
+    <div class="members-block">
+      <h3>Team Roles — 10 Students</h3>
+      <div class="member-tags">
+        <span class="member-tag">Team Captain: Jacob</span>
+        <span class="member-tag">Build Lead</span>
+        <span class="member-tag">Builder × 2</span>
+        <span class="member-tag">Programming Lead</span>
+        <span class="member-tag">Programmer × 1</span>
+        <span class="member-tag">Outreach Lead</span>
+        <span class="member-tag">Notebook Lead</span>
+        <span class="member-tag">Driver</span>
+        <span class="member-tag">Co-Driver</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="container">
+    <p class="section-eyebrow">Get in Touch</p>
+    <h2 class="section-title">Contact Trash Disposal</h2>
+    <p class="section-body">Questions about our team, sponsorship opportunities, or community outreach partnerships — reach out directly.</p>
+    <div class="contact-details">
+      <div class="contact-row"><span class="contact-label">Team</span><span class="contact-value">Trash Disposal — FTC #36440</span></div>
+      <div class="contact-row"><span class="contact-label">Program</span><span class="contact-value">FIRST Tech Challenge · Ontario Region</span></div>
+      <div class="contact-row"><span class="contact-label">Location</span><span class="contact-value">Ottawa, Ontario, Canada</span></div>
+      <div class="contact-row"><span class="contact-label">Season</span><span class="contact-value">BIOBUZZ™ 2026–2027</span></div>
+      <div class="contact-row"><span class="contact-label">Head Coach</span><span class="contact-value">Lee Kachroo</span></div>
+      <div class="contact-row"><span class="contact-label">Email</span><span class="contact-value">problemsolvers36440@gmail.com</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>Trash Disposal · FTC Team #36440 · Ottawa, Ontario · BIOBUZZ™ 2026–27 · FIRST Tech Challenge</footer>
+</body>
+</html>
