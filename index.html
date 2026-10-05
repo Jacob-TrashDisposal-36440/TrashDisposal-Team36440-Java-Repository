@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A playful practice website for an FTC robotics team learning GitHub together.">
+  <title>Trash Disposal #36440 | FTC Team Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f172a'/%3E%3Crect x='14' y='18' width='36' height='30' rx='8' fill='%2338bdf8'/%3E%3Ccircle cx='25' cy='32' r='4' fill='%230f172a'/%3E%3Ccircle cx='39' cy='32' r='4' fill='%230f172a'/%3E%3Cpath d='M24 41h16M32 18V10m-5 0h10' stroke='%23facc15' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Trash Disposal #36440 home">
+      <span class="brand-icon" aria-hidden="true">🤖</span>
+      <span>Trash Disposal #36440</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#missions">Missions</a>
+      <a href="#team">Team</a>
+      <a href="#score-lab">Score Lab</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">FTC TEAM LAB</p>
+        <h1>Build it. Code it. Test it. Improve it.</h1>
+        <p class="hero-text">Welcome to our shared robotics workspace. Every idea begins as an experiment, and every commit moves the team forward.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#missions">View today’s missions</a>
+          <button class="button secondary" id="spark-button" type="button">Launch robot cheer</button>
+        </div>
+        <p id="cheer" class="cheer" aria-live="polite"></p>
+      </div>
+
+      <div class="robot-stage" aria-label="Friendly robot display">
+        <div class="status-pill"><span></span> SYSTEM READY</div>
+        <div class="robot" aria-hidden="true">
+          <div class="antenna"><i></i></div>
+          <div class="robot-head">
+            <b></b><b></b>
+            <span></span>
+          </div>
+          <div class="robot-body">
+            <div class="robot-screen">FTC</div>
+            <i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+      </div>
+    </section>
+
+    <section class="dashboard" aria-label="Team progress">
+      <article><strong>11</strong><span>Java assignments</span></article>
+      <article><strong>1</strong><span>Shared repository</span></article>
+      <article><strong>∞</strong><span>Ideas to test</span></article>
+    </section>
+
+    <section class="section" id="missions">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MISSION CONTROL</p>
+          <h2>Today’s GitHub missions</h2>
+        </div>
+        <p>Complete each mission with your branch partner.</p>
+      </div>
+
+      <div class="mission-grid">
+        <article class="mission-card cyan">
+          <span class="mission-number">01</span>
+          <div class="mission-icon" aria-hidden="true">📥</div>
+          <h3>Clone</h3>
+          <p>Bring the team repository from GitHub to your computer.</p>
+          <span class="mission-tag">GET THE PROJECT</span>
+        </article>
+        <article class="mission-card yellow">
+          <span class="mission-number">02</span>
+          <div class="mission-icon" aria-hidden="true">🌿</div>
+          <h3>Branch</h3>
+          <p>Create your own safe working space before changing a file.</p>
+          <span class="mission-tag">WORK SAFELY</span>
+        </article>
+        <article class="mission-card coral">
+          <span class="mission-number">03</span>
+          <div class="mission-icon" aria-hidden="true">💾</div>
+          <h3>Commit</h3>
+          <p>Save a checkpoint and explain clearly what you changed.</p>
+          <span class="mission-tag">SAVE A CHECKPOINT</span>
+        </article>
+        <article class="mission-card purple">
+          <span class="mission-number">04</span>
+          <div class="mission-icon" aria-hidden="true">🚀</div>
+          <h3>Push</h3>
+          <p>Send your branch and its new commits back to GitHub.</p>
+          <span class="mission-tag">SHARE YOUR WORK</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section team-section" id="team">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE BUILD CREW</p>
+          <h2>Meet the team</h2>
+        </div>
+        <p>Each student can create one page on their own branch.</p>
+      </div>
+
+      <div class="team-grid">
+        <a class="team-card" href="team/student_template.html">
+          <span class="avatar blue">?</span>
+          <span><strong>Your page goes here</strong><small>Choose your robotics role</small></span>
+          <span class="view">OPEN</span>
+        </a>
+        <a class="team-card" href="team/coach_lee.html">
+          <span class="avatar gold">CL</span>
+          <span><strong>Coach Lee</strong><small>Coach and mission guide</small></span>
+          <span class="view">OPEN</span>
+        </a>
+        <article class="team-card locked">
+          <span class="avatar coral">+</span>
+          <span><strong>Add another teammate</strong><small>Copy the student template</small></span>
+          <span class="view">NEXT</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section score-section" id="score-lab">
+      <div class="score-copy">
+        <p class="eyebrow">SCORE LAB</p>
+        <h2>Test a match score</h2>
+        <p>Use the controls to practise JavaScript events. Try changing the point values later.</p>
+        <div class="challenge-box">
+          <span>CHALLENGE CARD</span>
+          <strong id="challenge-text">Score at least 25 points.</strong>
+          <button id="new-challenge" type="button">New challenge</button>
+        </div>
+      </div>
+
+      <div class="score-board">
+        <div class="score-display">
+          <span>TEAM SCORE</span>
+          <strong id="score" aria-live="polite">0</strong>
+          <small>POINTS</small>
+        </div>
+        <div class="score-controls">
+          <button type="button" data-points="1"><strong>+1</strong><span>Parking</span></button>
+          <button type="button" data-points="5"><strong>+5</strong><span>Sample</span></button>
+          <button type="button" data-points="10"><strong>+10</strong><span>Mission</span></button>
+          <button class="reset" id="reset-score" type="button"><strong>↻</strong><span>Reset</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="rules">
+      <p class="eyebrow">TEAM CODE</p>
+      <h2>Before you change anything</h2>
+      <ol>
+        <li><span>1</span>Check that you are on your own branch.</li>
+        <li><span>2</span>Edit only your assigned file.</li>
+        <li><span>3</span>Test before you commit.</li>
+        <li><span>4</span>Write a commit message that explains your change.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <span>Built by curious minds and careful commits.</span>
+    <span>FTC Team Practice Site</span>
+  </footer>
+</body>
+</html>
